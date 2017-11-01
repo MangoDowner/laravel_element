@@ -12,7 +12,7 @@
   export default {
     data () {
       return {
-        msg: 'This is a Example~!',
+        msg: 'Hello MangoDowner~!',
         radio: '1'
       }
     }
