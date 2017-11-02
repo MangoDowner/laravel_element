@@ -1,16 +1,18 @@
 <template>
-  <div id="app">
+  <div>
     <example></example>
-    <el-button icon="edit">Hello Element</el-button>
+    <lists></lists>
   </div>
 </template>
 <script>
   import Example from './components/Example.vue';
+  import Lists from './components/Lists.vue';
 
   export default {
     name: 'app',
     components: {
-      Example
+      Example,
+      Lists
     }
   };
 </script>
