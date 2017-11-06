@@ -1,16 +1,15 @@
 <template>
   <div>
-    <example></example>
-    <lists></lists>
+    <paginatelist></paginatelist>
   </div>
 </template>
 <script>
-  import Lists from './components/Lists.vue';
+  import Paginatelist from './components/Paginatelist.vue';
 
   export default {
     name: 'app',
     components: {
-      Lists
+      Paginatelist
     }
   };
 </script>
