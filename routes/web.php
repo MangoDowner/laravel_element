@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('example', function () { return view('example.index'); }); //首页
+Route::get('example/getList', ['uses' => 'ExampleController@getList','as'=>'example.getList']); //获取记录列表

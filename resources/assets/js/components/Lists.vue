@@ -1,66 +1,61 @@
 <template>
-  <el-table
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      label="日期"
-      width="180">
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column label="ID">
       <template slot-scope="scope">
-        <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+        <span style="margin-left: 10px">{{ scope.row.tag_id }}</span>
       </template>
     </el-table-column>
-    <el-table-column
-      label="姓名"
-      width="180">
+    <el-table-column label="名称">
       <template slot-scope="scope">
-        <el-popover trigger="hover" placement="top">
-          <p>姓名: {{ scope.row.name }}</p>
-          <p>住址: {{ scope.row.address }}</p>
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-          </div>
-        </el-popover>
+        <span style="margin-left: 10px">{{ scope.row.name }}</span>
+      </template>
+    </el-table-column>
+    <el-table-column label="图标">
+      <template slot-scope="scope">
+        <img :src="scope.row.img" class="image" width="100">
+      </template>
+    </el-table-column>
+    <el-table-column label="阶段">
+      <template slot-scope="scope">
+        <span style="margin-left: 10px">{{ scope.row.period }}</span>
+      </template>
+    </el-table-column>
+    <el-table-column label="排序">
+      <template slot-scope="scope">
+        <span style="margin-left: 10px">{{ scope.row.sort }}</span>
       </template>
     </el-table-column>
     <el-table-column label="操作">
       <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
+  import axios from '../../../lib/axios';
   export default {
     data() {
       return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        tableData: []
       }
     },
+    mounted() {
+      this.getTableData()
+    },
     methods: {
+      getTableData(id) {
+        var _this = this;
+        axios.get('/example/getList')
+        .then(function (response) {
+          _this.tableData = response.data.list;
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+      },
       handleEdit(index, row) {
         console.log(index, row);
       },
